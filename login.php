@@ -124,16 +124,34 @@
               </div>
               <!-- /Logo -->
               <h4 class="mb-2">Welcome to e-Mading JeWePe! 👋</h4>
-              <p class="mb-4"></p>
+              <p class="mb-4">
 
-              <form id="formAuthentication" class="mb-3" action="admin/index.php" method="POST">
+                <?php
+                if (isset($_GET['pesan'])) {
+                  if ($_GET['pesan'] == 'gagal') {
+                    echo '<i class = "text-danger">Login Gagal! Username atau password tidak sesuai</i>';
+                  } else if ($_GET['pesan'] == 'empty') {
+                    echo '<i class = "text-danger">Username atau password tidak boleh kosong</i>';
+                  }else if ($_GET['pesan'] == 'notfound') {
+                    echo '<i class = "text-danger">Username tidak tersedia</i>';
+                  }else if ($_GET['pesan'] == 'notlogin') {
+                    echo '<i class = "text-danger">Anda harus login terlebih dahulu</i>';
+                  }else if ($_GET['pesan'] == 'logout') {
+                    echo '<i class = "text-danger">Anda berhasil logout</i>';
+                  }
+                }
+                ?>
+
+              </p>
+
+              <form id="formAuthentication" class="mb-3" action="cek_login.php" method="POST">
                 <div class="mb-3">
                   <label for="email" class="form-label">Username</label>
                   <input
                     type="text"
                     class="form-control"
                     id="email"
-                    name="email-username"
+                    name="username"
                     placeholder="Enter your username"
                     autofocus
                   />
@@ -159,7 +177,7 @@
                 </div>
                 
                 <div class="mb-3">
-                  <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                  <button class="btn btn-primary d-grid w-100" name="submit" type="submit">Sign in</button>
                 </div>
               </form>
 
