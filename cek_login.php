@@ -1,5 +1,10 @@
 <?php
 
+// $pass = password_hash('jewepe123', PASSWORD_DEFAULT);
+
+// var_dump($pass);
+// die;
+
 include('admin/config.php');
 $db = new database();
 
@@ -29,12 +34,18 @@ if (isset($_SESSION['username']) || isset($_SESSION['id'])) {
                 $rows = 0;
             }
 
-            var_dump($sql);
-            die;
-
             // Cek ketersediaan data username
             if ($rows != 0) {
-                echo "Username tersedia";
+                $getPassword = mysqli_fetch_assoc($sql)['password'];
+
+                if (password_verify($password, $getPassword)) {
+                    $_SESSION['username'] = $username;
+                    $_SESSION['admin_id'] = mysqli_fetch_assoc($sql)['id'];
+
+                    header('Location:admin/index.php');
+                } else {
+                    header('Location:login.php?pesan=gagal');
+                }
             } else {
                 header('Location:login.php?pesan=notfound');
             }

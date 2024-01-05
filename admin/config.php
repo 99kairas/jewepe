@@ -19,8 +19,7 @@ class database
     // Function baru berfungsi untuk mengambil data (GET DATA)
     public function getDataUser($username)
     {
-        $sql = "SELECT * FROM admins WHERE username = '$username'";
-        $data = mysqli_query($this->conn, $sql);
+        $data = mysqli_query($this->conn, "SELECT * FROM admins WHERE username = '$username'");
         return $data;
     }
 }
