@@ -53,5 +53,44 @@ class database
 
         return $insertData;
     }
+
+    public function getByID($articleID)
+    {
+        $sql = mysqli_query($this->conn, "SELECT tba.id, title, description, content, image, status, view, tba.created_at, tba.updated_at, name, tba.admin_id 
+        FROM articles tba JOIN admins tbu 
+        ON tba.admin_id = tbu.id WHERE tba.id = '$articleID'") or die(mysqli_error($this->conn));
+
+        return $sql->fetch_array();
+    }
+
+    public function editArticle($articleID, $title, $description, $content, $status, $image, $admin_id)
+    {
+        $dateTime = date("Y-m-d H:i:s");
+        if ($image == 'not_set') {
+            $sql = mysqli_query(
+                $this->conn,
+                "UPDATE articles SET title = '$title', description = '$description', content = '$content', status = '$status', 
+                updated_at = '$dateTime', admin_id = '$admin_id' WHERE id = '$articleID'"
+            ) or die(mysqli_error($this->conn));
+
+            return $sql;
+        } else {
+            $sql = mysqli_query(
+                $this->conn,
+                "UPDATE articles SET title = '$title', description = '$description', content = '$content', status = '$status', 
+                image = '$image', updated_at = '$dateTime', admin_id = '$admin_id' WHERE id = '$articleID'"
+            ) or die(mysqli_error($this->conn));
+
+            return $sql;
+        }
+
+    }
+
+    public function deleteArticle($articleID)
+    {
+        $sql = mysqli_query($this->conn, "DELETE FROM articles WHERE id = '$articleID'") or die(mysqli_error($this->conn));
+
+        return $sql;
+    }
 }
 ?>

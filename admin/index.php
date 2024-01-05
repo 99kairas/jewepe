@@ -83,8 +83,9 @@ $data_article = $db->showUser();
                     <?= $row['view']; ?>
                   </td>
                   <td class="text-center">
-                    <a href="edit_article.php" class="btn btn-sm btn-warning">Update</a>
-                    <a href="delete_article.php" class="btn btn-sm btn-danger">Delete</a>
+                    <a href="edit_article.php?id=<?= $row['id']; ?>" class="btn btn-sm btn-warning">Update</a>
+                    <a href="action_process.php?action=delete&id=<?= $row['id']; ?>" class="btn btn-sm btn-danger"
+                      onclick="return confirm('Are you sure wanna delete this article?')">Delete</a>
                   </td>
                 </tr>
               <?php }
