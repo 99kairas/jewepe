@@ -23,11 +23,32 @@ class database
         return $data;
     }
     // GET DATA ARTICLE
-    public function showUser()
+    public function showData()
     {
         $data = mysqli_query($this->conn, "SELECT tba.id, title, description, content, image, status, view, tba.created_at, tba.updated_at, name, tba.admin_id 
         FROM articles tba JOIN admins tbu 
         ON tba.admin_id = tbu.id");
+
+        if ($data) {
+            if (mysqli_num_rows($data) > 0) {
+                while ($row = mysqli_fetch_array($data)) {
+                    $result[] = $row;
+                }
+            } else {
+                $result = 'Data tidak tersedia';
+            }
+        }
+
+        return $result;
+    }
+
+    // GET DATA ARTICLE BY STATUS PUBLISH
+
+    public function showDataLanding()
+    {
+        $data = mysqli_query($this->conn, "SELECT tba.id, title, description, content, image, status, view, tba.created_at, tba.updated_at, tbu.name, tba.admin_id 
+        FROM articles tba JOIN admins tbu 
+        ON tba.admin_id = tbu.id WHERE status = 'published'");
 
         if ($data) {
             if (mysqli_num_rows($data) > 0) {
@@ -89,6 +110,13 @@ class database
     public function deleteArticle($articleID)
     {
         $sql = mysqli_query($this->conn, "DELETE FROM articles WHERE id = '$articleID'") or die(mysqli_error($this->conn));
+
+        return $sql;
+    }
+
+    public function updateViewArticle($articleID)
+    {
+        $sql = mysqli_query($this->conn, "UPDATE articles SET view = view + 1 WHERE id = '$articleID'") or die(mysqli_error($this->conn));
 
         return $sql;
     }

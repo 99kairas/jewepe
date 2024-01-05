@@ -10,8 +10,8 @@
               **==========
             -->
 
-                <p>Copyright &copy;
-                    <script>document.write(new Date().getFullYear());</script>. All Rights Reserved.
+                <p>e-Mading JeWePe &copy;
+                    <script>document.write(new Date().getFullYear());</script>. 99Kairas.
                     <!-- License information: https://untree.co/license/ -->
                 </p>
             </div>

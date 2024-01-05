@@ -4,7 +4,7 @@ include '../admin/template/header.php';
 include 'config.php';
 
 $db = new database();
-$data_article = $db->showUser();
+$data_article = $db->showData();
 
 ?>
 <!-- Content -->
