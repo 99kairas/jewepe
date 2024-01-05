@@ -36,11 +36,12 @@ if (isset($_SESSION['username']) || isset($_SESSION['id'])) {
 
             // Cek ketersediaan data username
             if ($rows != 0) {
-                $getPassword = mysqli_fetch_assoc($sql)['password'];
+                $getData = $sql->fetch_assoc();
 
-                if (password_verify($password, $getPassword)) {
+
+                if (password_verify($password, $getData['password'])) {
                     $_SESSION['username'] = $username;
-                    $_SESSION['admin_id'] = mysqli_fetch_assoc($sql)['id'];
+                    $_SESSION['id'] = $getData['id'];
 
                     header('Location:admin/index.php');
                 } else {

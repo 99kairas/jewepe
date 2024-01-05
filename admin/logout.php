@@ -4,7 +4,7 @@ session_start();
 
 // UNSET SESSION
 unset($_SESSION['username']);
-unset($_SESSION['admin_id']);
+unset($_SESSION['id']);
 
 // UNSET ALL
 session_unset();

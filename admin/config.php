@@ -25,7 +25,7 @@ class database
     // GET DATA ARTICLE
     public function showUser()
     {
-        $data = mysqli_query($this->conn, "SELECT tba.id, title, description, content, status, tba.created_at, tba.updated_at, name, tba.admin_id 
+        $data = mysqli_query($this->conn, "SELECT tba.id, title, description, content, image, status, view, tba.created_at, tba.updated_at, name, tba.admin_id 
         FROM articles tba JOIN admins tbu 
         ON tba.admin_id = tbu.id");
 
@@ -42,9 +42,8 @@ class database
         return $result;
     }
 
-    public function addArticle($title, $description, $content, $status, $image)
+    public function addArticle($title, $description, $content, $status, $image, $admin_id)
     {
-        $admin_id = $_SESSION['admin_id'];
         $dateTime = date('Y-m-d H:i:s');
         $insertData = mysqli_query(
             $this->conn,

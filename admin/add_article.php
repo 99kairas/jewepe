@@ -27,8 +27,13 @@ include '../admin/template/header.php';
                                         placeholder="Article Title" required />
                                 </div>
                                 <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Description Title *</label>
+                                    <input type="text" name="description" class="form-control" id="exampleFormControlInput1"
+                                        placeholder="Description Title" required />
+                                </div>
+                                <div class="mb-3">
                                     <label for="exampleFormControlTextarea1" class="form-label">Content *</label>
-                                    <textarea class="form-control" name="content" id="exampleFormControlTextarea1"
+                                    <textarea class="form-control summernote" name="content" id="exampleFormControlTextarea1"
                                         rows="3" required></textarea>
                                 </div>
                             </div>

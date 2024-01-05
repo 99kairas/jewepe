@@ -54,27 +54,37 @@ $data_article = $db->showUser();
               foreach ($data_article as $row) {
                 ?>
                 <tr>
-                  <th class="text-center">
+                  <td class="text-center">
                     <?= $no++; ?>
-                  </th>
-                  <td class="text-center">
-                    <?= $row['image']; ?>
                   </td>
-                  <td class="text-center">
+                  <td>
+                    <a href="../files/<?= $row['image']; ?>" target="_blank">
+                      <img src="../files/<?= $row['image']; ?>" class="img-thumbnail rounded" style="max-width: 100px;" />
+                    </a>
+
+                  </td>
+                  <td class=" text-center">
                     <?= $row['title']; ?>
                   </td>
                   <td class="text-center">
                     <?= $row['status']; ?>
                   </td>
                   <td class="text-center">
-                    <?= $row['updated_at']; ?>
+                    <?php
+                    if ($row['updated_at'] == '') {
+                      echo date('d M Y H:i', strtotime($row['created_at']));
+                    } else {
+                      echo date('d M Y H:i', strtotime($row['updated_at']));
+                    }
+
+                    ?>
                   </td>
                   <td class="text-center">
                     <?= $row['view']; ?>
                   </td>
                   <td class="text-center">
-                    <a href="edit_article.php" class="btn btn-sm-warning">Update Article</a>
-                    <a href="delete_article.php" class="btn btn-sm-danger">Delete Article</a>
+                    <a href="edit_article.php" class="btn btn-sm btn-warning">Update</a>
+                    <a href="delete_article.php" class="btn btn-sm btn-danger">Delete</a>
                   </td>
                 </tr>
               <?php }
